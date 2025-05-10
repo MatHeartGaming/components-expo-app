@@ -7,6 +7,7 @@ import { useColorScheme } from '@/hooks/useColorScheme';
 import { allRoutes } from '@/constants/Routes';
 import { useThemeColor } from '@/hooks/useThemeColor';
 import { Stack } from 'expo-router';
+
 import "../global.css";
 
 export default function RootLayout() {
