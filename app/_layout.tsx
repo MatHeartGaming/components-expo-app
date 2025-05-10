@@ -4,9 +4,9 @@ import { GestureHandlerRootView } from 'react-native-gesture-handler';
 
 import { useColorScheme } from '@/hooks/useColorScheme';
 
+import { allRoutes } from '@/constants/Routes';
 import { useThemeColor } from '@/hooks/useThemeColor';
-import ThemedText from '@/presentation/shared/ThemedText';
-import ThemedView from '@/presentation/shared/ThemedView';
+import { Stack } from 'expo-router';
 import "../global.css";
 
 export default function RootLayout() {
@@ -24,9 +24,37 @@ export default function RootLayout() {
   return (
     <GestureHandlerRootView style={{ backgroundColor: backgroundColor, flex: 1 }}>
       <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-        <ThemedView>
-          <ThemedText type='semi-bold' numberOfLines={2} className='mt-12 text-3xl'>Hola Mundo</ThemedText>
-        </ThemedView>
+        <Stack
+          screenOptions={{
+            headerShown: true,
+            headerShadowVisible: false,
+            contentStyle: {
+              backgroundColor: backgroundColor,
+            },
+            headerStyle: {
+              backgroundColor: backgroundColor,
+            }
+          }}
+        >
+          <Stack.Screen
+            name='index'
+            options={{
+              title: 'Components App'
+            }}
+          />
+
+          {allRoutes.map((route) => (
+            <Stack.Screen
+              key={route.name}
+              name={route.name}
+              options={{
+                title: route.title
+              }}
+            />
+          ))
+          }
+
+        </Stack>
       </ThemeProvider>
     </GestureHandlerRootView>
   );
