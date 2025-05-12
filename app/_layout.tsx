@@ -1,4 +1,3 @@
-import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native';
 import { useFonts } from 'expo-font';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 
@@ -8,6 +7,7 @@ import { allRoutes } from '@/constants/Routes';
 import { useThemeColor } from '@/hooks/useThemeColor';
 import { Stack } from 'expo-router';
 
+import { ThemeChangerProvider } from '@/presentation/context/ThemeChangerContext';
 import "../global.css";
 
 export default function RootLayout() {
@@ -24,7 +24,8 @@ export default function RootLayout() {
 
   return (
     <GestureHandlerRootView style={{ backgroundColor: backgroundColor, flex: 1 }}>
-      <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
+      {/*<ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>*/}
+      <ThemeChangerProvider>
         <Stack
           screenOptions={{
             headerShown: true,
@@ -56,7 +57,7 @@ export default function RootLayout() {
           }
 
         </Stack>
-      </ThemeProvider>
+      </ThemeChangerProvider>
     </GestureHandlerRootView>
   );
 }
